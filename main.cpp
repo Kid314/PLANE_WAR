@@ -63,12 +63,13 @@ vector<IMAGE> img_login_background;
 
 
 //flag 代表游戏状态
+// -1 刚开始
 // flag=0 正常游玩
 // =1 暂停
 // =2失败或者通关，进入菜单
 // =3重新挑战
 //=4 暂停之后回菜单
-int flag = 0;
+int flag = -1;
 //积分
 int score = 0;
 
@@ -160,7 +161,7 @@ int main()
 		//加载菜单
 		while (1)
 		{
-			if (flag == 0||flag==4)
+			if (flag == 0||flag==4||flag==-1)
 			{
 				switch (menu())
 				{
@@ -168,6 +169,11 @@ int main()
 					flag = 0;
 					break;
 				case 1:
+					if (flag == -1)
+					{
+						flag = 0;
+						break;
+					}
 					flag = 1;
 					break;
 				case 2:
